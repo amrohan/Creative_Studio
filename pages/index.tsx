@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "../components/Modal";
 import cloudinary from "../utils/cloudinary";
 import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
@@ -11,6 +11,9 @@ import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
 import Navbar from "../components/Navbar";
 import Feature from "../components/Feature";
+import cn from "clsx";
+import Slide from "react-reveal/Slide";
+// import Fade from "react-reveal/Fade";
 
 const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
@@ -26,6 +29,11 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
       setLastViewedPhoto(null);
     }
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
+
+  const [blur, setBlur] = useState(true);
+  setTimeout(() => {
+    setBlur(false);
+  }, 300);
 
   return (
     <>
@@ -44,40 +52,52 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           />
         )}
         <Navbar />
-        <section className="body-font text-gray-400">
-          <div className="container mx-auto flex flex-col items-center justify-center px-5 py-24">
-            <img
-              className="mb-10 w-5/6 rounded object-cover object-center md:w-3/6 lg:w-2/6"
-              alt="hero"
-              src="/per.gif"
-            />
-            <div className="w-full text-center lg:w-2/3">
-              <h1 className="title-font mb-4 text-3xl font-medium text-white sm:text-4xl">
-                Creative Studio
+        <section>
+          <div className="container mx-auto flex max-w-5xl flex-col items-center px-5 pt-24 md:h-screen md:flex-row md:pt-0">
+            <div className="mb-16 flex flex-col items-center text-center md:mb-0 md:w-1/2 md:items-start md:pr-16 md:text-left lg:flex-grow lg:pr-24">
+              <h1 className="mb-4 bg-gradient-to-r from-green-400 via-pink-500 to-purple-500 bg-clip-text text-3xl font-semibold text-transparent sm:text-4xl">
+                Unleash your creativity&nbsp;
+                <br className="hidden lg:inline-block" />
+                with our expert editing services for all your visual needs!
               </h1>
-              <p className="mb-8 leading-relaxed">
-                Meggings kinfolk echo park stumptown DIY, kale chips beard
-                jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice
-                godard disrupt ramps hexagon mustache umami snackwave tilde
-                chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui
-                celiac mlkshk freegan photo booth af fingerstache pitchfork.
+              <p className="mb-8 leading-relaxed text-gray-400">
+                Professional editing services for your brand and life's moments.
               </p>
               <div className="flex justify-center">
-                <button className="inline-flex rounded border-0 bg-[#00ffa0] px-6 py-2 text-lg text-black hover:bg-indigo-600 focus:outline-none">
-                  Contact Me
-                </button>
-                <button className="ml-4 inline-flex rounded border-0 bg-gray-800 px-6 py-2 text-lg text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none">
-                  Button
-                </button>
+                <Slide bottom>
+                  <a href="#services">
+                    <button className="rounded-md border border-zinc-800 px-8 py-2 text-zinc-900 decoration-wavy underline-offset-4 outline hover:animate-pulse hover:underline dark:border-green-500 dark:text-green-400 md:mt-0">
+                      Services
+                    </button>
+                  </a>
+                  <Link href="https://www.instagram.com/creative_studio_2712/">
+                    <button className="ml-3 rounded-md border border-zinc-800 px-2 py-2 text-zinc-900 decoration-wavy underline-offset-4 outline hover:animate-pulse hover:underline dark:border-pink-500 dark:text-pink-400 md:mt-0">
+                      Instagram
+                    </button>
+                  </Link>
+                </Slide>
               </div>
             </div>
+            <div className="w-5/6 md:w-1/2 lg:w-full lg:max-w-lg">
+              <img
+                className={cn(
+                  "w-full rounded-xl object-cover object-center duration-700 ease-in-out md:w-9/12 lg:w-full",
+                  blur ? "blur-lg grayscale" : "blur-0 grayscale-0"
+                )}
+                src="/per.gif"
+                alt="Homage page gif"
+              />
+            </div>
           </div>
-          <Feature />
-          <h1 className="pb-10 text-center text-3xl text-white md:text-4xl">
-            Showcase
-          </h1>
         </section>
-        <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
+        <Feature />
+        <h1
+          className="pb-10 text-center text-3xl text-white md:text-4xl"
+          id="showcase"
+        >
+          Showcase
+        </h1>
+        <div className="mx-auto max-w-5xl columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
           {images.map(({ id, public_id, format, blurDataUrl }) => (
             <Link
               key={id}
