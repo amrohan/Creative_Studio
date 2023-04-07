@@ -19,16 +19,27 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between p-4">
         <Link href="/" className="flex items-center">
           <img src="/logo.jpg" className="mr-3 h-8 rounded-md" alt="Logo" />
-          <span className="self-center whitespace-nowrap text-base font-semibold dark:text-white md:text-xl">
+          <span className="self-center whitespace-nowrap text-base font-semibold text-white md:text-xl">
             CreativeStudio
           </span>
         </Link>
         <div className="flex md:order-2 ">
           <button
+            onClick={() => {
+              const recipient = "jugalmistry2712@gmail.com";
+              const subject = "Subject Line";
+              const body = "Hey there how can I help you?";
+              const mailtoLink = `mailto:${encodeURIComponent(
+                recipient
+              )}?subject=${encodeURIComponent(
+                subject
+              )}&body=${encodeURIComponent(body)}`;
+              window.location.href = mailtoLink;
+            }}
             type="button"
-            className="mr-3 rounded-lg bg-[#00ffa0] px-2 py-[2px] text-center text-sm  font-medium text-black md:mr-0 md:px-4 md:py-2"
+            className="mr-3 rounded-lg bg-[#00ffa0] px-2 py-[2px] text-center text-sm font-medium text-black hover:bg-cyan-300 md:mr-0 md:px-4 md:py-2"
           >
-            Contact Me
+            Email Me
           </button>
           <button
             data-collapse-toggle="navbar-cta"
@@ -74,7 +85,7 @@ export default function Navbar() {
             <li>
               <a
                 href="#services"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+                className="block rounded border-gray-700 py-2 pl-3  pr-4 text-white hover:bg-gray-700 hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Services
               </a>
@@ -82,7 +93,7 @@ export default function Navbar() {
             <li>
               <a
                 href="#showcase"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+                className="block rounded border-gray-700 py-2 pl-3  pr-4 text-white hover:bg-gray-700 hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
               >
                 Showcase
               </a>
