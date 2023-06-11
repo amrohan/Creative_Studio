@@ -105,7 +105,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
           className="pb-10 text-center text-3xl text-white md:text-4xl"
           id="showcase"
         >
-          Showcase
+          Gallery
         </h1>
         <div className="mx-auto max-w-5xl columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
           {images.map(({ id, public_id, format, blurDataUrl }) => (
